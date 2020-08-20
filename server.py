@@ -1,6 +1,6 @@
 
 from flask import Flask, jsonify, render_template
-from model import connect_to_db, User
+from model import connect_to_db, Answer
 
 
 app = Flask(__name__)
@@ -13,21 +13,25 @@ def homepage():
     return render_template('index.html')
 
 
-@app.route('/api/user/<int:user_id>')
-def get_user(user_id):
-    """Return a user from the database as JSON."""
+@app.route('/api/answer/<int:answer_id>')
+def get_answer(answer_id):
+    """Return a answer from the database as JSON."""
 
-    user = User.query.get(user_id)
+    answer = Answer.query.get(answer_id)
 
-    if user:
+    if answer:
         return jsonify({'status': 'success',
-                        'user_id': user.user_id,
-                        'email': user.email,
-                        'username': user.username,
-                        'usertype': user.usertype})
+                        'checklistid': answer.checklistid,
+                        'answer_id': answer.answer_id,
+                        'questionnumber': answer.questionnumber,
+                        'role': answer.role,
+                        'answer':answer.answer,
+                        'timespent': answer.timespent,
+                        'comment': answer.comment
+                        })
     else:
         return jsonify({'status': 'error',
-                        'message': 'No user found with that ID'})
+                        'message': 'No answer found with that ID'})
 
 
 if __name__ == '__main__':

@@ -1,14 +1,18 @@
 "use strict";
 
-$('#get-user').on('submit', (evt) => {
+$('#get-answer').on('submit', (evt) => {
   evt.preventDefault();
 
-  const selectedId = $('#user-id').val();
+  const selectedId = $('#answer-id').val();
 
-  $.get(`/api/user/${selectedId}`, (res) => {
-    $('#username').html(res.username);
-    $('#email').html(res.email);
-    $('#usertype').html(res.usertype);
+  $.get(`/api/answer/${selectedId}`, (res) => {
+    $('#answer_id').html(res.answer_id);
+    $('#checklistid').html(res.checklistid);
+    $('#questionnumber').html(res.questionnumber);
+    $('#role').html(res.role);
+    $('#answer').html(res.answer);
+    $('#timespent').html(res.timespent);
+    $('#comment').html(res.comment);
   });
 });
 
